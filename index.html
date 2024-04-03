@@ -1,26 +1,44 @@
+<!-- HTML5 문서를 선언합니다. -->
 <!DOCTYPE html>
+<!-- 문서의 주 언어가 영어임을 명시합니다. -->
 <html lang="en">
   <head>
+    <!-- 문자 인코딩을 UTF-8로 설정합니다. -->
     <meta charset="utf-8" />
+    <!-- 웹사이트의 파비콘을 설정합니다. -->
     <link rel="icon" href="/app-icons/finder/32.png" />
+    <!-- 웹사이트의 설명을 제공합니다. -->
     <meta name="description" content="MacOS Desktop experience for Web" />
+    <!-- 웹사이트의 제목을 설정합니다. -->
     <title>macOS in Svelte</title>
+    <!-- 애플 기기에서 사용할 아이콘을 설정합니다. -->
     <link rel="apple-touch-icon" href="/app-icons/finder/192.png" sizes="192x192" />
+    <!-- 모바일 브라우저의 테마 색상을 설정합니다. -->
     <meta name="theme-color" content="#ffffff" />
+    <!-- Open Graph 프로토콜을 사용하여 페이지의 제목을 설정합니다. -->
     <meta property="og:title" content="macOS in Svelte" />
+    <!-- Open Graph 프로토콜을 사용하여 페이지의 설명을 설정합니다. -->
     <meta property="og:description" content="A painting of macOS Ventura in HTML, CSS and JS" />
+    <!-- Open Graph 프로토콜을 사용하여 페이지의 이미지를 설정합니다. -->
     <meta property="og:image" content="https://macos-web.app/cover-image.png" />
+    <!-- Open Graph 프로토콜을 사용하여 페이지의 URL을 설정합니다. -->
     <meta property="og:url" content="https://macos-web.app" />
+    <!-- 트위터 카드 타입을 큰 이미지 요약으로 설정합니다. -->
     <meta name="twitter:card" content="summary_large_image" />
 
+    <!-- 브라우저가 미리 로드해야 할 리소스를 지정합니다. 여기서는 맥 시작음입니다. -->
     <link rel="prefetch" href="/sounds/mac-startup-sound.mp3" />
   </head>
   <body>
+    <!-- React, Vue, Svelte 등의 SPA(Single Page Application)에서 사용될 root 요소입니다. -->
     <div id="root"></div>
+    <!-- 타입스크립트 파일을 모듈로서 로드합니다. 여기서는 애플리케이션의 메인 스크립트입니다. -->
     <script type="module" src="/src/main.ts"></script>
   </body>
 
   <script type="module">
+    // Microsoft Clarity는 웹사이트에 대한 사용자 행동 분석 도구입니다. 이 스크립트는 Clarity 분석 도구를 비동기적으로 로드하고 초기화하는 과정을 담당합니다.
+    // 사용자의 웹사이트 방문 및 상호작용 데이터를 수집하여, 웹사이트 소유자가 사용자 경험을 이해하고 개선할 수 있는 인사이트를 제공합니다.
     (function (c, l, a, r, i, t, y) {
       c[a] =
         c[a] ||
@@ -32,6 +50,6 @@
       t.src = 'https://www.clarity.ms/tag/' + i;
       y = l.getElementsByTagName(r)[0];
       y.parentNode.insertBefore(t, y);
-    })(window, document, 'clarity', 'script', 'a95kitlcti');
+    })(window, document, 'clarity', 'script', 'lr1emfwz7b');
   </script>
 </html>

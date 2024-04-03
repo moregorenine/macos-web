@@ -7,6 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { prefetch } from './prefetch-plugin';
 
 export default defineConfig({
+  base: '/macos-web/',
   plugins: [
     svelte(),
     prefetch(),

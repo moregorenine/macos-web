@@ -1,8 +1,11 @@
 <script lang="ts">
   // 필요한 모듈들을 import 합니다.
   import { elevation } from '🍎/actions';
+  // 컨텍스트 메뉴를 렌더링할 때 사용됩니다.
   import { contextMenuConfig } from '🍎/configs/menu/context.menu.config';
+  // Svelte의 트랜지션을 사용하여 요소를 서서히 나타나게 하거나 사라지게 하는 함수를 정의합니다.
   import { fadeOut } from '🍎/helpers/fade';
+  // 테마를 저장하고 변경하는 함수를 가져옵니다.
   import { theme } from '🍎/stores/theme.store';
 
   // targetElement라는 prop을 선언합니다. 이 prop은 부모 컴포넌트로부터 받아옵니다.
@@ -62,7 +65,7 @@
     <!-- contextMenuConfig.default 객체의 모든 값을 순회하면서 메뉴 아이템을 생성합니다. -->
     {#each Object.values(contextMenuConfig.default) as contents}
       <!-- 각 메뉴 아이템의 제목을 버튼에 표시합니다. -->
-      <button class="menu-item">{contents.title}</button>
+      <button class="menu-item" on:click={contents.action}>{contents.title}</button>
 
       <!-- 메뉴 아이템에 'breakAfter' 속성이 있으면 구분선을 추가합니다. -->
       {#if contents.breakAfter}

@@ -21,7 +21,7 @@ export default defineConfig({
         'cursors/(normal|link|text|help)-select.svg',
         '**/*.mp3',
         '**/*.webp',
-        'assets/*.webp',
+        // 'assets/*.webp',
       ],
       manifest: {
         name: 'Mac OS Monterey Svelte Web',

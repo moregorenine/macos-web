@@ -38,7 +38,7 @@
 {#if import.meta.env.PROD}
   <iframe
     id="audio"
-    src="/sounds/mac-startup-sound.mp3"
+    src="/macos-web/sounds/mac-startup-sound.mp3"
     type="audio/mp3"
     allow="autoplay"
     title="hello"

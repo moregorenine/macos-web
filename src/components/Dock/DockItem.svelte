@@ -130,7 +130,7 @@
   <span style:transform="translate(0, {$appOpenIconBounceTransform}px)">
     <img
       bind:this={imageEl}
-      src="/app-icons/{appID}/256.webp"
+      src="/macos-web/app-icons/{appID}/256.webp"
       alt="{title} app"
       style:width="{$widthPX / 16}rem"
       draggable="false"
@@ -184,7 +184,9 @@
     padding: 0.5rem 0.75rem;
     border-radius: 0.375rem;
 
-    box-shadow: hsla(0deg, 0%, 0%, 30%) 0px 1px 5px 2px, var(--double-border);
+    box-shadow:
+      hsla(0deg, 0%, 0%, 30%) 0px 1px 5px 2px,
+      var(--double-border);
 
     color: var(--system-color-light-contrast);
     font-family: var(--system-font-family);

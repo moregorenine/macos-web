@@ -41,7 +41,7 @@
     <img
       width="128"
       height="128"
-      src="/app-icons/system-preferences/256.webp"
+      src="/macos-web/app-icons/system-preferences/256.webp"
       alt="AppStore app"
       draggable="false"
     />

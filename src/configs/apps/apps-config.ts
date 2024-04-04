@@ -2,6 +2,7 @@ import { createAppConfig } from '🍎/helpers/create-app-config';
 
 const wallpapers = createAppConfig({
   title: 'Wallpapers',
+  imageSrc: '/macos-web/app-icons/wallpapers/256.webp',
   resizable: true,
 
   height: 600,
@@ -12,7 +13,7 @@ const wallpapers = createAppConfig({
 
 const calculator = createAppConfig({
   title: 'Calculator',
-
+  imageSrc: '/macos-web/app-icons/calculator/256.webp',
   expandable: true,
   resizable: false,
 
@@ -22,11 +23,13 @@ const calculator = createAppConfig({
 
 const calendar = createAppConfig({
   title: 'Calendar',
+  imageSrc: '/macos-web/app-icons/calendar/256.webp',
   resizable: true,
 });
 
 const vscode = createAppConfig({
   title: 'VSCode',
+  imageSrc: '/macos-web/app-icons/vscode/256.webp',
   resizable: true,
 
   height: 600,
@@ -35,6 +38,7 @@ const vscode = createAppConfig({
 
 const finder = createAppConfig({
   title: 'Finder',
+  imageSrc: '/macos-web/app-icons/finder/256.webp',
   resizable: true,
 
   // dockBreaksBefore: true,
@@ -43,16 +47,19 @@ const finder = createAppConfig({
 
 const safari = createAppConfig({
   title: 'Safari',
+  imageSrc: '/macos-web/app-icons/safari/256.webp',
   resizable: true,
 });
 
 const systemPreferences = createAppConfig({
   title: 'System Preferences',
+  imageSrc: '/macos-web/app-icons/systemPreferences/256.webp',
   resizable: true,
 });
 
 const purusTwitter = createAppConfig({
   title: `About the Developer`,
+  imageSrc: '/macos-web/app-icons/purus-twitter/256.webp',
   resizable: true,
 
   dockBreaksBefore: true,
@@ -63,6 +70,7 @@ const purusTwitter = createAppConfig({
 
 const viewSource = createAppConfig({
   title: `View Source`,
+  imageSrc: '/macos-web/app-icons/view-source/256.webp',
   resizable: true,
 
   shouldOpenWindow: false,
@@ -71,6 +79,7 @@ const viewSource = createAppConfig({
 
 const ukraine = createAppConfig({
   title: `Support Ukraine`,
+  imageSrc: '/macos-web/app-icons/ukraine/256.webp',
   resizable: true,
 
   shouldOpenWindow: false,
@@ -81,6 +90,7 @@ const ukraine = createAppConfig({
 
 const vercel = createAppConfig({
   title: `Powered by Vercel`,
+  imageSrc: '/macos-web/app-icons/vercel/256.webp',
   resizable: true,
 
   shouldOpenWindow: false,
@@ -92,6 +102,7 @@ const vercel = createAppConfig({
 
 const appstore = createAppConfig({
   title: 'App Store',
+  imageSrc: '/macos-web/app-icons/appstore/256.webp',
   resizable: true,
 });
 

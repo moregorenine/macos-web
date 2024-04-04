@@ -1,4 +1,7 @@
-import { folders } from '🍎/stores/folders.store';
+// import { folders } from '🍎/stores/folders.store';
+import {windowItems} from '🍎/stores/window-items.store';
+
+'🍎/stores/window-items.store'
 
 /**
  * 이 코드는 컨텍스트 메뉴의 설정을 정의하는 객체를 내보냅니다.
@@ -16,9 +19,9 @@ export const contextMenuConfig = {
       breakAfter: true, // 이 메뉴 항목 다음에 구분선을 그립니다.
       action: () => {
         console.log('New Folder');
-        folders.update((currentFolders) => [
-          ...currentFolders,
-          { id: Date.now(), name: 'New Folder' },
+        windowItems.update((currentWindowItems) => [
+          ...currentWindowItems,
+          { appID : Date.now() },
         ]);
       },
     },

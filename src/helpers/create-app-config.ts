@@ -1,5 +1,7 @@
 export type AppConfig = {
   title: string;
+  imageSrc: string;
+  isFolder?: boolean;
 
   resizable?: boolean;
   expandable?: boolean;
@@ -16,6 +18,7 @@ export type AppConfig = {
 };
 
 export const createAppConfig = (et: AppConfig) => ({
+  isFolder: false,
   shouldOpenWindow: true,
   dockBreaksBefore: false,
 

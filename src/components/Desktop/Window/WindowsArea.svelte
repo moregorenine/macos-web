@@ -3,10 +3,9 @@
   import { appsConfig } from '🍎/configs/apps/apps-config';
   // 앱 상태를 관리하는 스토어를 가져옵니다.
   import { activeApp, activeAppZIndex, appZIndices, openApps } from '🍎/stores/apps.store';
-  // // 폴더 상태를 관리하는 스토어를 가져옵니다.
-  // import { folders } from '🍎/stores/folders.store';
-  // // 폴더 아이콘 컴포넌트를 가져옵니다.
-  // import FolderIcon from '🍎/components/Desktop/FolderIcon.svelte';
+  // 시스템 상태를 관리하는 스토어를 가져옵니다.
+  import { windowItems } from '🍎/stores/window-items.store';
+  import WindowItem from '🍎/components/Desktop/Window/WindowItem.svelte';
 
   // 활성 앱이 변경될 때마다 활성 앱의 z-인덱스를 2 증가시킵니다.
   $: $activeApp, ($activeAppZIndex += 2);
@@ -39,14 +38,29 @@
 
   // 앱의 z-인덱스가 변경될 때마다 normalizeAppZIndices 함수를 호출합니다.
   $: $appZIndices, normalizeAppZIndices();
+
+  function allowDrop(event) {
+    event.preventDefault();
+  }
+
+  function drop(event) {
+    event.preventDefault(); // prevent the default behavior
+    let appID = event.dataTransfer.getData('text'); // get the appID from the transferred data
+    const isDuplicate = $windowItems.some((windowItem) => windowItem.appID === appID);
+    if (!isDuplicate) {
+      $windowItems = [...$windowItems, { appID }]; // add a new WindowItem to the list
+    }
+  }
 </script>
 
 <!-- 윈도우 영역을 정의합니다. -->
-<section id="windows-area">
+<section id="windows-area" on:drop={drop} on:dragover={allowDrop}>
   <!-- 각 폴더에 대해 폴더 아이콘 컴포넌트를 렌더링합니다. -->
-  <!-- {#each $folders as folder (folder.id)}
-    <FolderIcon {folder} />
-  {/each} -->
+  <div id="window-items">
+    {#each $windowItems as windowItem}
+      <WindowItem appID={windowItem.appID} />
+    {/each}
+  </div>
   <!-- 각 앱에 대해 -->
   {#each Object.keys(appsConfig) as appID}
     <!-- 해당 앱이 열려 있고, 해당 앱이 윈도우를 열어야 하는 경우 -->

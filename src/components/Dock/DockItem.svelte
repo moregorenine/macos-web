@@ -144,6 +144,10 @@
   $: showPwaBadge = isAppStore && needsUpdate;
   // PWA 배지를 표시하면 바운스 효과를 적용합니다.
   $: showPwaBadge && bounceEffect();
+
+  function drag(event) {
+    event.dataTransfer.setData('text', appID); // set the appID as the data to be transferred
+  }
 </script>
 
 <!-- 앱을 열기 위한 버튼입니다. 클릭하면 openApp 함수가 호출됩니다. -->
@@ -168,10 +172,12 @@
     <!-- 앱의 아이콘 이미지입니다. 너비는 widthPX의 값에 따라 변하며, 드래그는 불가능합니다. -->
     <img
       bind:this={imageEl}
+      id={appID}
       src="/macos-web/app-icons/{appID}/256.webp"
       alt="{title} app"
       style:width="{$widthPX / 16}rem"
-      draggable="false"
+      draggable="true"
+      on:dragstart={drag}
     />
   </span>
 

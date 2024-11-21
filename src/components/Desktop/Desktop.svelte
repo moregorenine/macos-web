@@ -19,7 +19,7 @@
       import('@fontsource/inter/latin-ext-500.css'),
       import('@fontsource/inter/latin-ext-600.css'),
     ]).then(() => {
-      console.log(1);
+      // console.log(1);
     });
   }
 

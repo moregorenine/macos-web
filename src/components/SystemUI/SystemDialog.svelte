@@ -48,7 +48,12 @@
       in:dialogOpenTransition
       out:fadeOut
       use:trapFocus
-      use:clickOutside={{ callback: () => backdropDismiss && close() }}
+      use:clickOutside={{
+        callback: () => {
+          console.log(`nothing`);
+          /*backdropDismiss && close()*/
+        },
+      }}
       on:click|stopPropagation={() => {}}
     >
       <slot />
@@ -86,7 +91,9 @@
 
     &.dark {
       // border-radius: inherit;
-      box-shadow: var(--elevation), inset 0 0 0 0.9px hsla(var(--system-color-dark-hsl), 0.3),
+      box-shadow:
+        var(--elevation),
+        inset 0 0 0 0.9px hsla(var(--system-color-dark-hsl), 0.3),
         0 0 0 1px hsla(var(--system-color-light-hsl), 0.5);
     }
   }

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useRegisterSW } from 'virtual:pwa-register/svelte';
   import { systemNeedsUpdate } from '🍎/stores/system.store';
+  import { onDestroy } from 'svelte';
   import SystemDialog from '../SystemUI/SystemDialog.svelte';
 
   let systemUpdateDialog: SystemDialog;
@@ -18,6 +19,14 @@
     onRegistered(swr) {
       console.log(`SW registered: ${swr}`);
     },
+    onOfflineReady() {
+      console.log('앱이 오프라인 준비되었습니다.');
+    },
+    onNeedRefresh() {
+      console.log('새로운 서비스 워커가 활성화 준비되었습니다.');
+      if ($needRefresh) return;
+      needRefresh.set(true);
+    },
     onRegisterError(error) {
       console.log('SW registration error', error);
     },
@@ -26,13 +35,70 @@
   $: $needRefresh && systemUpdateDialog?.open();
   $: $systemNeedsUpdate = $needRefresh;
 
+  // 주기적으로 업데이트를 확인하는 함수
+  let swRegistration: ServiceWorkerRegistration | null = null;
+  const checkForUpdates = async () => {
+    console.log('1. checkForUpdates');
+
+    if ($needRefresh) return;
+    if (!navigator.serviceWorker) return;
+
+    try {
+      // 현재 Service Worker 등록 상태 가져오기
+      console.log('2. 현재 Service Worker 등록 상태 가져오기');
+      const registration = await navigator.serviceWorker.getRegistration();
+      if (!registration) return;
+
+      swRegistration = registration;
+
+      // 업데이트 상태 확인
+      await registration.update(); // 업데이트 프로세스 트리거
+      if (registration.waiting) {
+        console.log('3. 업데이트가 감지되었습니다.');
+        needRefresh.set(true);
+        // systemUpdateDialog?.open();
+      }
+    } catch (error) {
+      console.error('SW 업데이트 확인 중 오류 발생:', error);
+    }
+  };
+  const updateInterval = setInterval(checkForUpdates, 10000);
+
+  // 컴포넌트가 파괴될 때 클린업
+  onDestroy(() => clearInterval(updateInterval));
+
   function close() {
     systemUpdateDialog.close();
     needRefresh.set(false);
   }
 
   async function handleUpdateApp() {
-    updateServiceWorker();
+    if (swRegistration?.waiting) {
+      // 서비스 워커가 대기 중인 경우
+      swRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      // 서비스 워커가 새로고침을 완료할 때까지 대기
+      swRegistration.waiting.addEventListener('statechange', (event: any) => {
+        if (event.target.state === 'activated') {
+          window.location.reload(); // 업데이트가 완료되면 페이지 새로 고침
+        }
+      });
+    }
+  }
+
+  // F5 새로고침 문제 해결: 서비스 워커가 활성화되도록 처리
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      // 새로고침 시, service worker가 `waiting` 상태에서 바로 활성화되도록 처리
+      console.log('Controller change detected, reloading page...');
+      window.location.reload(); // 서비스 워커가 활성화되면 페이지 새로 고침
+    });
+
+    // 페이지가 로드될 때 서비스 워커가 대기 상태일 경우 강제로 `skipWaiting` 호출
+    navigator.serviceWorker.ready.then((registration) => {
+      if (registration.waiting) {
+        registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      }
+    });
   }
 </script>
 
